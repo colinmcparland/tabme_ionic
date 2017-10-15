@@ -46,13 +46,17 @@ export class RegisterPage {
    * Function to check session status
    */
   ionViewWillEnter() {
-    if(this.storage.get('access_token')) {
-      this.navCtrl.push(DashboardPage);
-      //  Ping auth server to see if token still valid
-      //  If yes, skip to dashboard
-      //  If no, try refresh token
-      //  If still no, redirect to login page
-    }
+    var this_alias = this;
+
+    this.storage.get('access_token').then((res) => { 
+      if(res != null) {
+        this_alias.navCtrl.push(DashboardPage);
+      }
+      else {
+
+      }
+    });
+    
   }
 
   /**
@@ -95,7 +99,7 @@ export class RegisterPage {
           //  Error message
            const alert = this.alertCtrl.create({
             title: 'Error', 
-            subTitle: 'Looks like that email is already taken, if it\'s yours, try logging in.',
+            subTitle: resp.content,
             buttons: ['Close']
           });
 

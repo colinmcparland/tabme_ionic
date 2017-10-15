@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { AddfriendPage } from '../addfriend/addfriend';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the DashboardPage page.
@@ -16,7 +17,7 @@ import { AddfriendPage } from '../addfriend/addfriend';
 })
 export class DashboardPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -25,6 +26,11 @@ export class DashboardPage {
 
   addFriendPage()	{
   	this.navCtrl.push(AddfriendPage);
+  }
+
+  logout()  {
+    this.storage.clear();
+    this.navCtrl.popToRoot();
   }
 
 }

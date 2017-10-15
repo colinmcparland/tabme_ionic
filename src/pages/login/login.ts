@@ -34,7 +34,7 @@ export class LoginPage {
     //  Build the login form and validate
     this.login = this.formBuilder.group({
       email: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
@@ -44,13 +44,16 @@ export class LoginPage {
    * Function to check session status
    */
   ionViewWillEnter() {
-    if(this.storage.get('access_token')) {
-      this.navCtrl.push(DashboardPage);
-      //  Ping auth server to see if token still valid
-      //  If yes, skip to dashboard
-      //  If no, try refresh token
-      //  If still no, redirect to login page
-    }
+    var this_alias = this;
+
+    this.storage.get('access_token').then((res) => { 
+      if(res != null) {
+        this_alias.navCtrl.push('DashboardPage');
+      }
+      else {
+
+      }
+    });
   }
 
   /**
@@ -86,6 +89,7 @@ export class LoginPage {
           //  Write session data
           this.storage.set('email', postParams.email);
           this.storage.set('pass', postParams.password);
+          this.storage.set('id', resp.content.id);
           this.storage.set('access_token', resp.access_token);
           this.storage.set('refresh_token', resp.refresh_token);
           this.navCtrl.push(DashboardPage);
@@ -95,7 +99,7 @@ export class LoginPage {
           //  Error message
            const alert = this.alertCtrl.create({
             title: 'Error',
-            subTitle: 'Sorry, we couldn\'t find that email and password combination.  Please try again or create an account.',
+            subTitle: resp.content,
             buttons: ['Close']
           });
 
