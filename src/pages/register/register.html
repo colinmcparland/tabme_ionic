@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <h2>Welcome to Tab.me!</h2>
+      <p>
+        Please enter your username and password to get started.
+      </p>
+    </ion-row>
+    <form [formGroup]="signup" (ngSubmit)="postRequest()">
+      <ion-row justify-content-center>
+        <ion-col col-12>
+          <ion-input required formControlName="email" type="email" placeholder="Email"></ion-input>
+        </ion-col>
+        <ion-col col-12>
+          <ion-input required formControlName="password" type="password" placeholder="Password"></ion-input>
+        </ion-col>
+        <ion-col col-12>
+          <button ion-button full type='submit' [disabled]="!signup.valid">Sign Up</button>
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-row justify-content-center>
+      <p>Already have an account?  <a [navPush]="loginPage">Sign in now!</a></p>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
