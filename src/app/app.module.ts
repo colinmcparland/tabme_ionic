@@ -7,6 +7,7 @@ import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { AddfriendPage } from '../pages/addfriend/addfriend';
+import { AdddebitPage } from '../pages/adddebit/adddebit';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,7 +22,8 @@ import { IonicStorageModule } from '@ionic/storage';
     RegisterPage,
     LoginPage,
     DashboardPage,
-    AddfriendPage
+    AddfriendPage,
+    AdddebitPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { IonicStorageModule } from '@ionic/storage';
     RegisterPage,
     LoginPage,
     DashboardPage,
-    AddfriendPage
+    AddfriendPage,
+    AdddebitPage
   ],
   providers: [
     StatusBar,

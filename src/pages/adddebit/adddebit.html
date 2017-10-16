@@ -7,12 +7,28 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>adddebit</ion-title>
+    <ion-title>Add a New Debit</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+	<ion-grid>
+		<form [formGroup]="debit">
+			<ion-row justify-content-center>
+				<ion-col col-12>	
+					<ion-input formControlName="amount" required type="number" placeholder="Amount ($)"></ion-input>
+				</ion-col>
+				<ion-col col-12 *ngIf="fetchFriendsComplete">
+					<ion-select style="width: 100%; max-width: 100%; padding-left: 0;" formControlName="debtor" placeholder="Debtor">
+						<ion-option *ngFor="let friend of friendsList">{{ friend.email }}</ion-option>
+					</ion-select>
+				</ion-col>
+				<ion-col col-12>
+					<button ion-button full type='submit' [disabled]="!debit.valid">Add</button>
+				</ion-col>
+			</ion-row>
+		</form>
+	</ion-grid>
 </ion-content>

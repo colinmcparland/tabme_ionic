@@ -13,11 +13,11 @@
 </ion-header>
 
 
-<ion-content padding>
-	<ion-grid>
+<ion-content>
+	<ion-grid padding>
 		<ion-row justify-content-center align-items-center>
 			<ion-col col-12>
-				<form [formGroup]="search" (ngSubmit)="postRequest()">
+				<form [formGroup]="search" (ngSubmit)="addFriend()">
 					<ion-col col-12>
 						<ion-input required formControlName="email" type="email" placeholder="Email"></ion-input>
 					</ion-col>
@@ -28,4 +28,10 @@
 			</ion-col>
 		</ion-row>
 	</ion-grid>
+	<ion-list *ngIf="fetchFriendsComplete">
+	  <ion-list-header color="light">My Friends</ion-list-header>
+	  	<ion-item *ngFor="let friend of friendsList">
+	  		<p>{{ friend.email }}</p>
+	  	</ion-item>
+	</ion-list>
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { AddfriendPage } from '../addfriend/addfriend';
+import { AdddebitPage } from '../adddebit/adddebit';
 import { Storage } from '@ionic/storage';
 
 /**
@@ -26,6 +27,10 @@ export class DashboardPage {
 
   addFriendPage()	{
   	this.navCtrl.push(AddfriendPage);
+  }
+
+  addDebitPage() {
+    this.navCtrl.push(AdddebitPage);
   }
 
   logout()  {
