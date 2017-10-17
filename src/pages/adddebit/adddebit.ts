@@ -22,8 +22,10 @@ import { Storage } from '@ionic/storage';
 export class AdddebitPage {
 
 	private friendsList: any;
+	private debitList: any;
 	private fetchFriendsComplete: boolean;
 	private debit: FormGroup;
+	private fetchDebitsComplete: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public http: Http, public formBuilder: FormBuilder) {
 
@@ -33,6 +35,8 @@ export class AdddebitPage {
 	});
 
   	this.fetchFriendsComplete = false;
+  	this.fetchDebitsComplete = false;
+  	this.getDebitList();
   	this.getFriendsList();
   }
 
@@ -68,12 +72,95 @@ export class AdddebitPage {
         //  Parse the response into an array
         var resp = JSON.parse(data['_body']);
 
-        console.log(resp);
-
         //  If the status code is 200 move to dashboard and start session
         if(resp.status == '200') {
           this.friendsList = resp.content;
           this.fetchFriendsComplete = true;
+        }
+        else {
+          //  No friends found
+        }
+      }, error => {
+        console.log(error['_body']);
+      });
+    });
+  }
+
+  addDebit() {
+  	//  Get variables
+    var access_token = this.storage.get('access_token');
+    var refresh_token = this.storage.get('refresh_token');
+    var user_id = this.storage.get('id');
+
+    Promise.all([access_token, refresh_token, user_id]).then((val) => {
+      // Set the headers
+      var headers = new Headers();
+      headers.append('Accept', 'application/json');
+      headers.append('Content-Type', 'application/json');
+      headers.append('X-Requested-With', 'XMLHttpRequest');
+      headers.append('Authorization', 'Bearer ' + val[0]);
+
+      //  Create variable to pass into funciton later.
+      var options = new RequestOptions({ headers: headers });
+
+      let postParams = {
+        id: val[2],
+        email: this.debit.value.debtor,
+        amount: this.debit.value.amount
+      }
+        
+      // Make the request
+      this.http.post("http://tabme.tinybird.ca/api/debit", JSON.stringify(postParams), options)
+          .subscribe(data => {
+
+        //  Parse the response into an array
+        var resp = JSON.parse(data['_body']);
+
+        //  If the status code is 200 move to dashboard and start session
+        if(resp.status == '200') {
+        	this.fetchDebitsComplete = false;
+        	this.getDebitList();
+        }
+        else {
+          //  No friends found
+        }
+      }, error => {
+        console.log(error['_body']);
+      });
+    });
+  }
+
+
+  getDebitList() {
+  	//  Get variables
+    var access_token = this.storage.get('access_token');
+    var refresh_token = this.storage.get('refresh_token');
+    var user_id = this.storage.get('id');
+
+    Promise.all([access_token, refresh_token, user_id]).then((val) => {
+      // Set the headers
+      var headers = new Headers();
+      headers.append('Accept', 'application/json');
+      headers.append('Content-Type', 'application/json');
+      headers.append('X-Requested-With', 'XMLHttpRequest');
+      headers.append('Authorization', 'Bearer ' + val[0]);
+
+      //  Create variable to pass into funciton later.
+      var options = new RequestOptions({ headers: headers });
+        
+      // Make the request
+      this.http.get("http://tabme.tinybird.ca/api/debit/" + val[2], options)
+          .subscribe(data => {
+
+        //  Parse the response into an array
+        var resp = JSON.parse(data['_body']);
+
+        // console.log(resp);
+
+        //  If the status code is 200 move to dashboard and start session
+        if(resp.status == '200') {
+        	this.debitList = resp.content;
+        	this.fetchDebitsComplete = true;
         }
         else {
           //  No friends found

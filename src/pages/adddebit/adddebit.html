@@ -13,9 +13,9 @@
 </ion-header>
 
 
-<ion-content padding>
-	<ion-grid>
-		<form [formGroup]="debit">
+<ion-content>
+	<ion-grid padding>
+		<form [formGroup]="debit" (ngSubmit)="addDebit()">
 			<ion-row justify-content-center>
 				<ion-col col-12>	
 					<ion-input formControlName="amount" required type="number" placeholder="Amount ($)"></ion-input>
@@ -31,4 +31,11 @@
 			</ion-row>
 		</form>
 	</ion-grid>
+	<ion-list *ngIf="fetchDebitsComplete">
+	  <ion-list-header color="light">My Debits</ion-list-header>
+	  	<ion-item *ngFor="let debit of debitList">
+	  		<h2>{{ debit.debtor_email }}</h2>
+	  		<p>Owes me ${{ debit.amount }}&emsp;&middot;&emsp;{{ debit.created }}</p>
+	  	</ion-item>
+	</ion-list>
 </ion-content>

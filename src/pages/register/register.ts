@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import { AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { DashboardPage } from '../dashboard/dashboard';
+import { PaymentsetupPage } from '../paymentsetup/paymentsetup';
 import { Storage } from '@ionic/storage';
 
 
@@ -93,7 +94,7 @@ export class RegisterPage {
           this.storage.set('pass', postParams.password);
           this.storage.set('access_token', resp.access_token);
           this.storage.set('refresh_token', resp.refresh_token);
-          this.navCtrl.push(DashboardPage);
+          this.navCtrl.push(PaymentsetupPage);
         }
         else {
           //  Error message

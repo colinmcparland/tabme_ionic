@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>dashboard</ion-title>
+    <ion-title>{{email}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -24,7 +24,7 @@
 			  <ion-icon name="add-circle" item-start></ion-icon>
 			  Add a debit
 			</button>
-			<button ion-item>
+			<button ion-item (click)="payBackPage()">
 			  <ion-icon name="refresh-circle" item-start></ion-icon>
 			  Pay back a debit
 			</button>

@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "noStrictGenericChecks": true,
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "declaration": false,
     "emitDecoratorMetadata": true,
