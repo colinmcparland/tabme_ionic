@@ -10,7 +10,7 @@ import { PaymentsetupPage } from '../pages/paymentsetup/paymentsetup';
 })
 export class MyApp {
 
-  rootPage:any = PaymentsetupPage;
+  rootPage:any = RegisterPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
