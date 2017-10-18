@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>CC Setup</ion-title>
+    <ion-title>Payment Setup</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,24 +19,55 @@
 		<form class="ccform" [formGroup]="ccinfo" (ngSubmit)="getToken()">
 			<ion-row>
 				<ion-col col-12>
-					<ion-input placeholder="1234 5678 9012 3456" formControlName="number" name="number" ></ion-input>
+					<ion-input placeholder="1234 5678 9012 3456" formControlName="number" name="number"></ion-input>
 				</ion-col>
 				<ion-col col-12>
-					<ion-input placeholder="Name on Card" formControlName="name" name="name" ></ion-input>
+					<ion-input placeholder="Hugh Jass" formControlName="name" name="name"></ion-input>
 				</ion-col>
 				<ion-col col-12>
-					<ion-input placeholder="Expiry" formControlName="expiry" name="expiry" ></ion-input>
+					<ion-input placeholder="Expiry" formControlName="expiry" name="expiry"></ion-input>
 				</ion-col>
 				<ion-col col-12>
-					<ion-input placeholder="CVC" formControlName="cvc" name="cvc" ></ion-input>
+					<ion-input placeholder="CVC" formControlName="cvc" name="cvc"></ion-input>
+				</ion-col>
+				<div class="sep"></div>
+				<ion-col col-12>
+					<ion-input placeholder="First Name" formControlName="fname"></ion-input>
 				</ion-col>
 				<ion-col col-12>
-          			<button ion-button full type='submit' [disabled]="!ccinfo.valid">Save</button>
+					<ion-input placeholder="Last Name" formControlName="lname"></ion-input>
+				</ion-col>
+				<ion-col col-6>
+					<ion-input placeholder="Address" formControlName="address"></ion-input>
+				</ion-col>
+				<ion-col col-6>
+					<ion-input placeholder="City" formControlName="city"></ion-input>
+				</ion-col>
+				<ion-col col-6>
+					<ion-select formControlName="stateprov"  placeholder='Prov/State'>
+					  	<ion-option *ngFor="let thisstateprov of stateprovlist" >{{ thisstateprov }}</ion-option>
+					</ion-select>
+				</ion-col>
+				<ion-col col-6>
+					<ion-select formControlName="country"  placeholder='Country'>
+					  	<ion-option value="CA">Canada</ion-option>
+					  	<ion-option value="US">USA</ion-option>
+					</ion-select>
+				</ion-col>
+				<ion-col col-6>
+					<ion-input placeholder="ZIP" formControlName="zip"></ion-input>
+				</ion-col>
+				<ion-col col-6>
+					<ion-datetime placeholder="Date of Birth" displayFormat="MM DD, YYYY" formControlName="dob"></ion-datetime>
+				</ion-col>
+				<ion-col col-12>
+					<button ion-button full type='submit' [disabled]="!ccinfo.valid">Next</button>
+          			<!-- <button ion-button full type='submit' [disabled]="!ccinfo.valid">Save</button> -->
         		</ion-col>
 			</ion-row>
 		</form>
 		<ion-row>
-			<small style="text-align: center;">We use your credit card to facilitate payments to and from your account.  We store your information in a safe and secure place and never share it with anybody, no matter what.</small>
+			<small style="text-align: center;">We use your debit card to facilitate payments to and from your account.  We do not store any of your information and encrypt it when we use it.</small>
 		</ion-row>
 	</ion-grid>
 

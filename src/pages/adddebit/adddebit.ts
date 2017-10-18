@@ -160,7 +160,7 @@ export class AdddebitPage {
         //  If the status code is 200 move to dashboard and start session
         if(resp.status == '200') {
         	this.debitList = resp.content;
-        	this.fetchDebitsComplete = true;
+          this.fetchDebitsComplete = true;        	
         }
         else {
           //  No friends found

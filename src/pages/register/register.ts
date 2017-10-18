@@ -90,11 +90,15 @@ export class RegisterPage {
         //  If the status code is 200 move to dashboard and start session
         if(resp.status == '200') {
           //  Write session data
-          this.storage.set('email', postParams.email);
-          this.storage.set('pass', postParams.password);
-          this.storage.set('access_token', resp.access_token);
-          this.storage.set('refresh_token', resp.refresh_token);
-          this.navCtrl.push(PaymentsetupPage);
+          Promise.all([
+            this.storage.set('email', postParams.email),
+            this.storage.set('id', resp.content.id),
+            this.storage.set('access_token', resp.access_token),
+            this.storage.set('refresh_token', resp.refresh_token)
+          ]).then(val => {
+            this.navCtrl.push(PaymentsetupPage);
+          });
+          
         }
         else {
           //  Error message

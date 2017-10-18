@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Add a New Debit</ion-title>
+    <ion-title>Add a New Credit</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -32,10 +32,28 @@
 		</form>
 	</ion-grid>
 	<ion-list *ngIf="fetchDebitsComplete">
-	  <ion-list-header color="light">My Debits</ion-list-header>
-	  	<ion-item *ngFor="let debit of debitList">
-	  		<h2>{{ debit.debtor_email }}</h2>
-	  		<p>Owes me ${{ debit.amount }}&emsp;&middot;&emsp;{{ debit.created }}</p>
-	  	</ion-item>
+	  <ion-list-header color="light">My Credits</ion-list-header>
+	  	<ion-item-sliding *ngFor="let debit of debitList">
+			<ion-item>
+				<h2>{{ debit.debtor_email }}</h2>
+				<p>Owes me ${{ debit.amount }}&emsp;&middot;&emsp;{{ debit.created }}</p>
+			</ion-item>
+			<ion-item-options side="right">
+			 	<button ion-button color="primary">
+			   		<ion-icon name="remind"></ion-icon>
+			    		Remind
+			  		</button>
+			  	<button ion-button color="light">
+			    	<ion-icon name="waive"></ion-icon>
+			    		Waive
+			  	</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+	<ion-list *ngIf="!fetchFriendsComplete">
+	  <ion-list-header color="light">You have no friends to credit.</ion-list-header>
+	</ion-list>
+	<ion-list *ngIf="!fetchDebitsComplete">
+	  <ion-list-header color="light">You have no outstanding credits.</ion-list-header>
 	</ion-list>
 </ion-content>

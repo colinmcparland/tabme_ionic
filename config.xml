@@ -88,4 +88,5 @@
     <allow-navigation href="http://10.211.55.2:8100" />
     <plugin name="cordova-plugin-stripe" spec="^1.5.3" />
     <engine name="browser" spec="~5.0.0" />
+    <plugin name="cordova-plugin-browsersync" spec="^1.1.0" />
 </widget>

@@ -11,4 +11,14 @@ page-paymentsetup {
 		margin: 15px 0;
 		color: #cfcfcf;
 	}
+
+	ion-select {
+		max-width: none;
+		width: 90%;
+		padding-left: 0 !important;
+	}
+
+	ion-datetime {
+		padding-left: 0 !important;
+	}
 }

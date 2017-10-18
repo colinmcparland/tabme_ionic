@@ -5,14 +5,30 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>payback</ion-title>
+    <ion-title>Pay Back a Debt</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content>
+	<ion-list *ngIf="fetchDebitsComplete">
+	  <ion-list-header color="light">My Outstanding Debts</ion-list-header>
+	  	<ion-item-sliding *ngFor="let debit of debitList">
+			<ion-item>
+				<h2>{{ debit.creditor_email }}</h2>
+				<p>I owe ${{ debit.amount }}&emsp;&middot;&emsp;{{ debit.created }}</p>
+			</ion-item>
+			<ion-item-options side="right">
+			 	<button ion-button (click)="payBack(debit)" color="secondary">
+			    	Pay
+			  	</button>
+			  	<button ion-button color="light">
+			    	Dispute
+			  	</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+	<ion-list *ngIf="!fetchDebitsComplete">
+	  <ion-list-header color="light">You have no outstanding debts.</ion-list-header>
+	</ion-list>
 </ion-content>

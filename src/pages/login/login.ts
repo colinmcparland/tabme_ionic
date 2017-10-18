@@ -6,6 +6,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { AlertController } from 'ionic-angular';
 import { DashboardPage } from '../dashboard/dashboard';
+import { PaymentsetupPage } from '../paymentsetup/paymentsetup';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -87,12 +88,22 @@ export class LoginPage {
         //  If the status code is 200 move to dashboard and start session
         if(resp.status == '200') {
           //  Write session data
-          this.storage.set('email', postParams.email);
-          this.storage.set('pass', postParams.password);
-          this.storage.set('id', resp.content.id);
-          this.storage.set('access_token', resp.access_token);
-          this.storage.set('refresh_token', resp.refresh_token);
-          this.navCtrl.push(DashboardPage);
+          Promise.all([
+            this.storage.set('email', postParams.email),
+            this.storage.set('id', resp.content.id),
+            this.storage.set('access_token', resp.access_token),
+            this.storage.set('refresh_token', resp.refresh_token),
+            this.storage.set('stripe_token', resp.stipe_token),
+            this.storage.set('cc_token', resp.cc_token)
+          ]).then(val => {
+            if(resp.stripe_token) {
+              this.navCtrl.push(DashboardPage);
+            }
+            else {
+              this.navCtrl.push(PaymentsetupPage);
+            }
+            
+          });
         }
         else {
 
