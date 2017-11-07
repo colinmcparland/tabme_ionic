@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { AddfriendPage } from '../addfriend/addfriend';
 import { AdddebitPage } from '../adddebit/adddebit';
 import { PaybackPage } from '../payback/payback';
+import { DataPage } from '../data/data';
 import { Storage } from '@ionic/storage';
 
 /**
@@ -41,6 +42,10 @@ export class DashboardPage {
 
   payBackPage() {
     this.navCtrl.push(PaybackPage);
+  }
+
+  dataPage() {
+    this.navCtrl.push(DataPage);
   }
 
   logout()  {

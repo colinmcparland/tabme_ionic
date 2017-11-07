@@ -4,8 +4,9 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NgModule, ErrorHandler } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { AlertController } from 'ionic-angular';
+import { AlertController, LoadingController } from 'ionic-angular';
 import { DashboardPage } from '../dashboard/dashboard';
+import { RegisterPage } from '../register/register';
 import { PaymentsetupPage } from '../paymentsetup/paymentsetup';
 import { Storage } from '@ionic/storage';
 
@@ -20,6 +21,7 @@ export class LoginPage {
    * Declare variables for this class
    */
   private login : FormGroup;
+  private registerPage: any;
 
   /*  TODO:  Add alert for errors  */
 
@@ -30,7 +32,9 @@ export class LoginPage {
    * @param {FormBuilder}     private formBuilder Form Builder library to parse login credentials
    * @param {AlertController} private alertCtrl   Alert controller for error messages, etc..
    */
-  constructor(public navCtrl: NavController, public http: Http, private formBuilder: FormBuilder, private alertCtrl: AlertController, public storage: Storage) {
+  constructor(public navCtrl: NavController, public http: Http, private formBuilder: FormBuilder, private alertCtrl: AlertController, public storage: Storage, public loadingCtrl: LoadingController) {
+
+    this.registerPage = RegisterPage;
     
     //  Build the login form and validate
     this.login = this.formBuilder.group({
@@ -39,6 +43,13 @@ export class LoginPage {
     });
   }
 
+  /**
+   *  Functiion to start the loading icon up.
+   */
+  startLoading()  {
+    let loading = this.loadingCtrl.create({});
+    return loading;
+  }
 
 
   /**
@@ -49,7 +60,7 @@ export class LoginPage {
 
     this.storage.get('access_token').then((res) => { 
       if(res != null) {
-        this_alias.navCtrl.push('DashboardPage');
+        this_alias.navCtrl.push(DashboardPage);
       }
       else {
 
@@ -77,6 +88,10 @@ export class LoginPage {
       email: this.login.value.email,
       password: this.login.value.password
     }
+
+    let loading = this.startLoading();
+
+    loading.present();
     
     // Make the request
     this.http.post("http://tabme.tinybird.ca/api/user/validate", JSON.stringify(postParams), options)
@@ -84,6 +99,8 @@ export class LoginPage {
 
         //  Parse the response into an array
         var resp = JSON.parse(data['_body']);
+
+        loading.dismiss();
 
         //  If the status code is 200 move to dashboard and start session
         if(resp.status == '200') {

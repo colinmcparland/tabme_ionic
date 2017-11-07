@@ -4,12 +4,11 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NgModule, ErrorHandler } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { AlertController } from 'ionic-angular';
+import { AlertController, LoadingController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { DashboardPage } from '../dashboard/dashboard';
 import { PaymentsetupPage } from '../paymentsetup/paymentsetup';
 import { Storage } from '@ionic/storage';
-
 
 @Component({
   selector: 'page-register',
@@ -31,7 +30,7 @@ export class RegisterPage {
    * @param {FormBuilder}     private formBuilder  FormBuilder library to parse and validate form
    * @param {AlertController} private alertCtrl    Alert controller for showing error messages etc.
    */
-  constructor(public navCtrl: NavController, public http: Http, private formBuilder: FormBuilder, private alertCtrl: AlertController, public storage: Storage) {
+  constructor(public navCtrl: NavController, public http: Http, private formBuilder: FormBuilder, private alertCtrl: AlertController, public storage: Storage, public loadingCtrl: LoadingController) {
 
     //  Set attributes
     this.loginPage = LoginPage;
@@ -61,6 +60,14 @@ export class RegisterPage {
   }
 
   /**
+   *  Functiion to start the loading icon up.
+   */
+  startLoading()  {
+    let loading = this.loadingCtrl.create({});
+    return loading;
+  }
+
+  /**
    * Function for front end to hook into to perform POST request to the server
    */
   postRequest() {
@@ -79,6 +86,11 @@ export class RegisterPage {
       email: this.signup.value.email,
       password: this.signup.value.password
     }
+
+    //  Start loading
+    let loading = this.startLoading();
+
+    loading.present();
     
     // Make the request
     this.http.post("http://tabme.tinybird.ca/api/user/create", JSON.stringify(postParams), options)
@@ -86,6 +98,9 @@ export class RegisterPage {
         //  Parse the response into an array
         var resp = JSON.parse(data['_body']);
         console.log(resp);
+
+        //  Stop loading
+        loading.dismiss();
 
         //  If the status code is 200 move to dashboard and start session
         if(resp.status == '200') {
@@ -96,7 +111,8 @@ export class RegisterPage {
             this.storage.set('access_token', resp.access_token),
             this.storage.set('refresh_token', resp.refresh_token)
           ]).then(val => {
-            this.navCtrl.push(PaymentsetupPage);
+            // this.navCtrl.push(PaymentsetupPage);
+            this.navCtrl.push(DashboardPage);
           });
           
         }

@@ -6,6 +6,12 @@
 
 <ion-content padding>
   <ion-grid>
+    <ion-row justify-content-center>
+      <h2 style="display: block; margin: 0 auto;">Welcome to Tab.me!</h2>
+      <p>
+        Please enter your email and password to log in.
+      </p>
+    </ion-row>
     <form [formGroup]="login" (ngSubmit)="postRequest()">
       <ion-row justify-content-center>
         <ion-col col-12>
@@ -19,5 +25,8 @@
         </ion-col>
       </ion-row>
     </form>
+    <ion-row justify-content-center>
+      <p>Don't have an account?  <a [navPush]="registerPage">Sign up now!</a></p>
+    </ion-row>
   </ion-grid>
 </ion-content>

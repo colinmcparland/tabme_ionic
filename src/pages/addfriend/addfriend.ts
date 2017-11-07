@@ -4,9 +4,10 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NgModule, ErrorHandler } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { AlertController } from 'ionic-angular';
+import { AlertController, LoadingController } from 'ionic-angular';
 import { DashboardPage } from '../dashboard/dashboard';
 import { Storage } from '@ionic/storage';
+
 
 /**
  * Generated class for the AddfriendPage page.
@@ -24,9 +25,10 @@ export class AddfriendPage {
 	private search: FormGroup;
   private friendsList: any;
   private fetchFriendsComplete: boolean;
+  private loading: any;
 
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public storage: Storage, private http: Http, public alertCtrl: AlertController) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public storage: Storage, private http: Http, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
 
 	  	this.search = this.formBuilder.group({
 	  		email: ['', Validators.required]
@@ -36,10 +38,18 @@ export class AddfriendPage {
 
       this.fetchFriendsComplete = false;
 
+      this.loading = this.startLoading();
+
 	}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddfriendPage');
+    this.loading.present();
+  }
+
+  startLoading() {
+    let loading = this.loadingCtrl.create({});
+    return loading;
   }
 
   addFriend() {
@@ -126,6 +136,8 @@ export class AddfriendPage {
       // Make the request
       this.http.post("http://tabme.tinybird.ca/api/friend/search/" + val[2], JSON.stringify(postParams), options)
           .subscribe(data => {
+
+        this.loading.dismiss();
 
         //  Parse the response into an array
         var resp = JSON.parse(data['_body']);

@@ -4,7 +4,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NgModule, ErrorHandler } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { AlertController } from 'ionic-angular';
+import { AlertController, LoadingController } from 'ionic-angular';
 import { DashboardPage } from '../dashboard/dashboard';
 import { Storage } from '@ionic/storage';
 
@@ -26,8 +26,9 @@ export class AdddebitPage {
 	private fetchFriendsComplete: boolean;
 	private debit: FormGroup;
 	private fetchDebitsComplete: boolean;
+  private loading: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public http: Http, public formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public http: Http, public formBuilder: FormBuilder, public loadingCtrl: LoadingController) {
 
   	this.debit = this.formBuilder.group({
 		amount: ['', Validators.required],
@@ -38,10 +39,20 @@ export class AdddebitPage {
   	this.fetchDebitsComplete = false;
   	this.getDebitList();
   	this.getFriendsList();
+    this.loading = this.startLoading();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdddebitPage');
+    this.loading.present();
+  }
+
+  /**
+   *  Functiion to start the loading icon up.
+   */
+  startLoading()  {
+    let loading = this.loadingCtrl.create({});
+    return loading;
   }
 
   getFriendsList() {
@@ -151,6 +162,8 @@ export class AdddebitPage {
       // Make the request
       this.http.get("http://tabme.tinybird.ca/api/debit/" + val[2], options)
           .subscribe(data => {
+
+        this.loading.dismiss();
 
         //  Parse the response into an array
         var resp = JSON.parse(data['_body']);
