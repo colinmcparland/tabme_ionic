@@ -27,7 +27,7 @@
     "@ionic/storage": "2.0.1",
     "@types/jquery": "^3.2.16",
     "cordova-browser": "5.0.0",
-    "cordova-ios": "^4.5.3",
+    "cordova-ios": "4.5.3",
     "cordova-plugin-browsersync": "^1.1.0",
     "cordova-plugin-device": "^1.1.6",
     "cordova-plugin-networkinterface": "^1.2.0",

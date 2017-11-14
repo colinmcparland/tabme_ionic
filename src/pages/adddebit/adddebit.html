@@ -21,7 +21,7 @@
 					<ion-input formControlName="amount" required type="number" placeholder="Amount ($)"></ion-input>
 				</ion-col>
 				<ion-col col-12 *ngIf="fetchFriendsComplete">
-					<ion-select style="width: 100%; max-width: 100%; padding-left: 0;" formControlName="debtor" placeholder="Debtor">
+					<ion-select title="Select Debtor" style="width: 100%; max-width: 100%; padding-left: 0;" formControlName="debtor"  placeholder="Debtor">
 						<ion-option *ngFor="let friend of friendsList">{{ friend.email }}</ion-option>
 					</ion-select>
 				</ion-col>
@@ -32,18 +32,18 @@
 		</form>
 	</ion-grid>
 	<ion-list *ngIf="fetchDebitsComplete">
-	  <ion-list-header color="light">My Credits</ion-list-header>
+	  <ion-list-header color="light">People Who Owe Me Money</ion-list-header>
 	  	<ion-item-sliding *ngFor="let debit of debitList">
 			<ion-item>
 				<h2>{{ debit.debtor_email }}</h2>
 				<p>Owes me ${{ debit.amount }}&emsp;&middot;&emsp;{{ debit.created }}</p>
 			</ion-item>
 			<ion-item-options side="right">
-			 	<button ion-button color="primary">
+			 	<button ion-button (click)='sendReminder(debit.debit_id)' color="primary">
 			   		<ion-icon name="remind"></ion-icon>
 			    		Remind
 			  		</button>
-			  	<button ion-button color="light">
+			  	<button ion-button (click)='deleteDebit(debit.debit_id)' color="light">
 			    	<ion-icon name="waive"></ion-icon>
 			    		Waive
 			  	</button>

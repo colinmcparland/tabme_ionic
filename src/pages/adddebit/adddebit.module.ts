@@ -4,7 +4,7 @@ import { AdddebitPage } from './adddebit';
 
 @NgModule({
   declarations: [
-    AdddebitPage,
+    AdddebitPage
   ],
   imports: [
     IonicPageModule.forChild(AdddebitPage),

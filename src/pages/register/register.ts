@@ -21,6 +21,7 @@ export class RegisterPage {
    */
   private signup : FormGroup;
   private loginPage: any;
+  private loading: any;
 
   /*  TODO:  Add alert for errors  */
   /**
@@ -34,6 +35,8 @@ export class RegisterPage {
 
     //  Set attributes
     this.loginPage = LoginPage;
+
+    this.loading = this.startLoading();
 
     this.signup = this.formBuilder.group({
       email: ['', Validators.required],
@@ -90,7 +93,7 @@ export class RegisterPage {
     //  Start loading
     let loading = this.startLoading();
 
-    loading.present();
+    this.loading.present();
     
     // Make the request
     this.http.post("http://tabme.tinybird.ca/api/user/create", JSON.stringify(postParams), options)
@@ -100,7 +103,7 @@ export class RegisterPage {
         console.log(resp);
 
         //  Stop loading
-        loading.dismiss();
+        this.loading.dismiss();
 
         //  If the status code is 200 move to dashboard and start session
         if(resp.status == '200') {

@@ -100,6 +100,8 @@ export class LoginPage {
         //  Parse the response into an array
         var resp = JSON.parse(data['_body']);
 
+        console.log(resp);
+
         loading.dismiss();
 
         //  If the status code is 200 move to dashboard and start session
@@ -117,7 +119,8 @@ export class LoginPage {
               this.navCtrl.push(DashboardPage);
             }
             else {
-              this.navCtrl.push(PaymentsetupPage);
+              // this.navCtrl.push(PaymentsetupPage);
+              this.navCtrl.push(DashboardPage);
             }
             
           });

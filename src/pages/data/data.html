@@ -23,14 +23,14 @@
         <p>Owes me ${{ debit.amount }}&emsp;&middot;&emsp;{{ debit.created }}</p>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="primary">
-            <ion-icon name="remind"></ion-icon>
-              Remind
-            </button>
-          <button ion-button color="light">
-            <ion-icon name="waive"></ion-icon>
-              Waive
-          </button>
+        <button ion-button (click)='sendReminder(debit.debit_id)' color="primary">
+          <ion-icon name="remind"></ion-icon>
+          Remind
+        </button>
+        <button ion-button (click)='deleteDebit(debit.debit_id)' color="light">
+          <ion-icon name="waive"></ion-icon>
+          Waive
+        </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
