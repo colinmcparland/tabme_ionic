@@ -7,40 +7,31 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{email}}</ion-title>
+    <ion-title>Dashboard</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
-	<ion-card>
-		<ion-card-header>
-			Get cracking!
-		</ion-card-header>
-		<ion-list>
-			<button ion-item (click)="addDebitPage()">
-			  <ion-icon name="add-circle" item-start></ion-icon>
-			  Add a credit
-			</button>
-			<button ion-item (click)="payBackPage()">
-			  <ion-icon name="refresh-circle" item-start></ion-icon>
-			  Pay back a debt
-			</button>
-			<button ion-item (click)="addFriendPage()">
-			  <ion-icon name="person-add" item-start></ion-icon>
-			  Add a friend
-			</button>
-			<button ion-item (click)="dataPage()"> 
-			  <ion-icon name="analytics" item-start></ion-icon>
-			  View my data
-			</button>
-			<button ion-item (click)="logout()">
-			  <ion-icon name="exit" item-start></ion-icon>
-			  Log out
-			</button>
-		</ion-list>
-	</ion-card>	
-
+<ion-content>
+	<button ion-item (click)="addDebitPage()">
+	  <ion-icon name="add-circle" item-start></ion-icon>
+	  Add an IOU
+	</button>
+	<button ion-item (click)="dataPage()">
+	  <ion-icon name="eye" item-start></ion-icon>
+	  View my IOUs
+	</button>
+	<button ion-item (click)="addFriendPage()">
+	  <ion-icon name="person-add" item-start></ion-icon>
+	  Add a Friend
+	</button>
+<!-- 	<button ion-item (click)="dataPage()"> 
+	  <ion-icon name="analytics" item-start></ion-icon>
+	  View my data
+	</button> -->
+	<button ion-item (click)="logout()">
+	  <ion-icon name="exit" item-start></ion-icon>
+	  Log out
+	</button>
 </ion-content>

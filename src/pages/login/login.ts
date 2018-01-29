@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ViewController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import { AlertController, LoadingController } from 'ionic-angular';
 import { DashboardPage } from '../dashboard/dashboard';
 import { RegisterPage } from '../register/register';
+import { InfoPage } from '../info/info';
 import { PaymentsetupPage } from '../paymentsetup/paymentsetup';
 import { Storage } from '@ionic/storage';
 
@@ -22,6 +23,7 @@ export class LoginPage {
    */
   private login : FormGroup;
   private registerPage: any;
+  private infoPage: any;
 
   /*  TODO:  Add alert for errors  */
 
@@ -32,9 +34,10 @@ export class LoginPage {
    * @param {FormBuilder}     private formBuilder Form Builder library to parse login credentials
    * @param {AlertController} private alertCtrl   Alert controller for error messages, etc..
    */
-  constructor(public navCtrl: NavController, public http: Http, private formBuilder: FormBuilder, private alertCtrl: AlertController, public storage: Storage, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public http: Http, private formBuilder: FormBuilder, private alertCtrl: AlertController, public storage: Storage, public loadingCtrl: LoadingController, public viewCtrl: ViewController) {
 
     this.registerPage = RegisterPage;
+    this.infoPage = InfoPage;
     
     //  Build the login form and validate
     this.login = this.formBuilder.group({
@@ -44,11 +47,15 @@ export class LoginPage {
   }
 
   /**
-   *  Functiion to start the loading icon up.
+   *  Function to start the loading icon up.
    */
   startLoading()  {
     let loading = this.loadingCtrl.create({});
     return loading;
+  }
+
+  ionViewDidLoad() {
+    this.viewCtrl.showBackButton(false);
   }
 
 
@@ -62,11 +69,16 @@ export class LoginPage {
       if(res != null) {
         this_alias.navCtrl.push(DashboardPage);
       }
-      else {
-
-      }
     });
   }
+
+
+  goToInfoPage() {
+    this.storage.set('first_time', null).then((val) => {
+      this.navCtrl.push(InfoPage);
+    })
+  }
+
 
   /**
    * Function that the login form will hook into in order to validate a user.

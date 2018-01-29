@@ -1,26 +1,10 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+# Tab.me
+Tab.me allows you to keep track of IOUs across your friends.  Never forget about a friend borrowing money again!
 
-## How to use this template
-
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
-
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
-
-### With the Ionic CLI:
-
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myTabs tabs
-```
-
-Then, to run it, cd into `myTabs` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
-
-Substitute ios for android if not on a Mac.
-
+## Todo
+- Add aggregates to all IOU records
+- Add functionality to waive all payments from aggregate screen
+- Add splash screen
+- Get a logo in place
+- Look into using cryptos to pay back instead of Stripe or other CC integration
+- Get some consistent UI going (this can be done later)

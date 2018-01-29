@@ -1,3 +1,22 @@
 page-dashboard {
 
+  .scroll-content {
+    background-color: map-get($colors, primary);
+  }
+
+  button.item {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border: none;
+    font-size: 20px;
+    background-color: map-get($colors, primary);
+    border-top: 1px solid nth($colors, 4);
+    border-bottom: 1px solid map-get($colors, light);
+    color: map-get($colors, light);
+  }
+
+  .item-ios.item-block .item-inner {
+    border: none;
+  }
+
 }

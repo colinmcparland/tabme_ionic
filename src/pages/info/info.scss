@@ -1,0 +1,27 @@
+page-info {
+
+  p {
+    font-size: 14px;
+    color: map-get($colors, dark);
+  }
+
+  strong {
+    color: #000;
+    font-size: 16px;
+  }
+
+  small {
+    font-size: 12px;
+    color: map-get($colors, dark);
+  }
+
+  .swiper-slide img {
+    max-height: 100px;
+  }
+
+  button.skip {
+    float: right;
+    font-size: 16px;
+    color: map-get($colors, primary);
+  }
+}

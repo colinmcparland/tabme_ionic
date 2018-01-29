@@ -11,6 +11,7 @@ import { AdddebitPage } from '../pages/adddebit/adddebit';
 import { PaybackPage } from '../pages/payback/payback';
 import { DataPage } from '../pages/data/data';
 import { PaymentsetupPage } from '../pages/paymentsetup/paymentsetup';
+import { InfoPage } from '../pages/info/info';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,7 +31,8 @@ import { Stripe } from '@ionic-native/stripe';
     AdddebitPage,
     PaybackPage,
     PaymentsetupPage,
-    DataPage
+    DataPage,
+    InfoPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { Stripe } from '@ionic-native/stripe';
     AdddebitPage,
     PaybackPage,
     PaymentsetupPage,
-    DataPage
+    DataPage,
+    InfoPage
   ],
   providers: [
     Stripe,
