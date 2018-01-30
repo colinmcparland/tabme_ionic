@@ -30,8 +30,15 @@
 	</ion-grid>
 	<ion-list *ngIf="fetchFriendsComplete">
 	  <ion-list-header color="light">My Friends</ion-list-header>
-	  	<ion-item *ngFor="let friend of friendsList">
-	  		<p>{{ friend.email }}</p>
-	  	</ion-item>
+      <ion-item-sliding #sliding *ngFor="let friend of friendsList">
+        <ion-item>
+        	<p>{{ friend.email }}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button (click)='goToAggregatePage(friend.email)' color="primary">
+            See All
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
 	</ion-list>
 </ion-content>

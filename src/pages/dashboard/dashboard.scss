@@ -1,7 +1,7 @@
 page-dashboard {
 
   .scroll-content {
-    background-color: map-get($colors, primary);
+    background-color: map-get($colors, light);
   }
 
   button.item {
@@ -10,13 +10,46 @@ page-dashboard {
     border: none;
     font-size: 20px;
     background-color: map-get($colors, primary);
-    border-top: 1px solid nth($colors, 4);
     border-bottom: 1px solid map-get($colors, light);
     color: map-get($colors, light);
   }
 
   .item-ios.item-block .item-inner {
     border: none;
+  }
+
+  ion-grid {
+    ion-icon {
+      font-size: 32px;
+      display: block;
+      text-align: center;
+    }
+  }
+
+  ion-row{
+
+    &:nth-child(1) {
+      background-color: map-get($colors, light);
+    }
+    
+    &:nth-child(2) {
+      padding: 10px;
+      background-color: map-get($colors, dark);
+      color: map-get($colors, light);
+    }
+  }
+
+  ion-col {
+    p {
+      text-align: center;
+      margin: 5px 0;
+    }
+
+    strong {
+      display: block;
+      text-align: center;
+      margin-bottom: 10px;
+    }
   }
 
 }

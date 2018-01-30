@@ -18,23 +18,25 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage: Storage) {
 
-    storage.get('first_time').then((res) => {
-      if(res == null) {
-        console.log('no bit set');
-        storage.set('first_time', 1).then((val) => {
-          this.rootPage = InfoPage;
-        })
-      } else if(res == 1){
-        this.rootPage = LoginPage;
-      }
-    })
-
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
+      storage.get('first_time').then((res) => {
+
+        console.log(res);
+        
+        if(res == null) {
+          console.log('no bit set');
+          storage.set('first_time', 1).then((val) => {
+            this.rootPage = InfoPage;
+          })
+        } else if(res == 1){
+          this.rootPage = LoginPage;
+        }
+
+        statusBar.styleDefault();
+        splashScreen.hide();
+      })
     });
+
   }
 
 }

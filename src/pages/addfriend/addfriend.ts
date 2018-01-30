@@ -6,6 +6,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { AlertController, LoadingController } from 'ionic-angular';
 import { DashboardPage } from '../dashboard/dashboard';
+import { AggregatePage } from '../aggregate/aggregate';
 import { Storage } from '@ionic/storage';
 
 
@@ -52,6 +53,15 @@ export class AddfriendPage {
     return loading;
   }
 
+  goToAggregatePage(email) {
+
+    let payload = {
+      email: email
+    }
+
+    this.navCtrl.push(AggregatePage, payload);
+  }
+
   addFriend() {
 
     //  Get variables
@@ -75,7 +85,7 @@ export class AddfriendPage {
       }
         
       // Make the request
-      this.http.post("http://tabme.tinybird.ca/api/friend/" + this.search.value.email, JSON.stringify(postParams), options)
+      this.http.post("http://tabme.tinybird.ca/api/friend/add/" + this.search.value.email, JSON.stringify(postParams), options)
           .subscribe(data => {
 
         //  Parse the response into an array
